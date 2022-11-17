@@ -1,0 +1,37 @@
+{
+  "name": "@rulesorg/discord-rules",
+  "version": "0.1.0",
+  "description": "A set of functions to interact with Rules discord guild",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc && tsc-alias",
+    "prepublishOnly": "yarn build"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ruleslabs/discord-rules.git"
+  },
+  "author": "Charles Lanier",
+  "license": "MIT",
+  "devDependencies": {
+    "tsc": "^2.0.4",
+    "tsc-alias": "^1.6.7",
+    "typescript": "^4.6.3"
+  },
+  "prettier": {
+    "printWidth": 120,
+    "semi": false,
+    "singleQuote": true
+  },
+  "bugs": {
+    "url": "https://github.com/ruleslabs/discord-rules/issues"
+  },
+  "homepage": "https://github.com/ruleslabs/discord-rules#readme",
+  "dependencies": {
+    "@rulesorg/mongoose-rules": "^0.19.2",
+    "@rulesorg/sdk-core": "^0.9.5",
+    "node-fetch": "^3.3.0"
+  }
+}
