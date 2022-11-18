@@ -8,3 +8,5 @@ export interface DiscordMember {
 }
 
 export type RoleName = keyof typeof ROLES
+
+export type DiscordRoles = { [roleName: string]: number }

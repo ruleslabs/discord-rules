@@ -1,8 +1,6 @@
-import { UserDocument } from '@rulesorg/mongoose-rules'
-
 import { DiscordClientInterface } from './interface'
 import { DISCORD_API_BASE_URL, DISCORD_GUILD_ID, ROLES } from '@/constants'
-import { DiscordMember, RoleName } from '@/types'
+import { DiscordMember, RoleName, DiscordRoles } from '@/types'
 
 export interface OauthCredentials {
   id: string
@@ -76,7 +74,7 @@ export class DiscordClient implements DiscordClientInterface {
     return (await memberRes.json() ?? null) as DiscordMember
   }
 
-  public async refreshRolesForMemberById(roles: UserDocument['discordRoles'], memberId?: string) {
+  public async refreshRolesForMemberById(roles: DiscordRoles, memberId?: string) {
     if (!memberId) return
 
     // getting currnet user roles

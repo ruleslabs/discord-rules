@@ -1,6 +1,4 @@
-import { UserDocument } from '@rulesorg/mongoose-rules'
-
-import { DiscordMember, RoleName } from '../types'
+import { DiscordMember, RoleName, DiscordRoles } from '../types'
 
 export abstract class DiscordClientInterface {
 
@@ -8,7 +6,7 @@ export abstract class DiscordClientInterface {
 
   public abstract getMemberById(memberId: string): Promise<DiscordMember | null>
 
-  public abstract refreshRolesForMemberById(roles: UserDocument['discordRoles'], memberId: string): void
+  public abstract refreshRolesForMemberById(roles: DiscordRoles, memberId: string): void
 
   public abstract grantRoleToMemberById(roleName: RoleName, memberId?: string): void
 
