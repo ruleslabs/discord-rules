@@ -1,12 +1,6 @@
 import { DiscordClientInterface } from './interface'
 import { DISCORD_API_BASE_URL, DISCORD_GUILD_ID, ROLES } from '@/constants'
-import { DiscordMember, RoleName, DiscordRoles } from '@/types'
-
-export interface OauthCredentials {
-  id: string
-  secret: string
-  baseRedirectUri: string
-}
+import { DiscordMember, RoleName, DiscordRoles, OauthCredentials, RolesRefreshOptions } from '@/types'
 
 export class DiscordClient implements DiscordClientInterface {
   protected oauthCredentials?: OauthCredentials
@@ -74,7 +68,7 @@ export class DiscordClient implements DiscordClientInterface {
     return (await memberRes.json() ?? null) as DiscordMember
   }
 
-  public async refreshRolesForMemberById(roles: DiscordRoles, memberId?: string) {
+  public async refreshRolesForMemberById(roles: DiscordRoles, memberId?: string, options: RolesRefreshOptions = {}) {
     if (!memberId) return
 
     // getting currnet user roles
@@ -108,6 +102,9 @@ export class DiscordClient implements DiscordClientInterface {
           authorization: `Bot ${this.botToken}`,
         },
       })
+
+      // sleep if needed
+      if (options.fetchDelay) await new Promise(resolve => setTimeout(resolve, options.fetchDelay))
     }
   }
 
