@@ -1,4 +1,3 @@
-import fetch from 'node-fetch'
 import { UserDocument } from '@rulesorg/mongoose-rules'
 
 import { DiscordClientInterface } from './interface'

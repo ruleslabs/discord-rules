@@ -31,7 +31,6 @@
   "homepage": "https://github.com/ruleslabs/discord-rules#readme",
   "dependencies": {
     "@rulesorg/mongoose-rules": "^0.19.2",
-    "@rulesorg/sdk-core": "^0.9.5",
-    "node-fetch": "^3.3.0"
+    "@rulesorg/sdk-core": "^0.9.5"
   }
 }
