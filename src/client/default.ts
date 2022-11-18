@@ -1,31 +1,35 @@
 import fetch from 'node-fetch'
 import { UserDocument } from '@rulesorg/mongoose-rules'
 
-import { ClientInterface } from './interface'
+import { DiscordClientInterface } from './interface'
 import { DISCORD_API_BASE_URL, DISCORD_GUILD_ID, ROLES } from '@/constants'
 import { DiscordMember, RoleName } from '@/types'
 
-export class Client implements ClientInterface {
-  protected id: string
-  protected secret: string
-  protected botToken: string
-  protected redirectUri: string
+export interface OauthCredentials {
+  id: string
+  secret: string
+  redirectUri: string
+}
 
-  constructor(id = '', secret = '', botToken = '', redirectUri = '') {
-    this.id = id
-    this.secret = secret
+export class DiscordClient implements DiscordClientInterface {
+  protected oauthCredentials?: OauthCredentials
+  protected botToken: string
+
+  constructor(botToken: string, oauthCredentials?: OauthCredentials) {
     this.botToken = botToken
-    this.redirectUri = redirectUri
+    this.oauthCredentials = oauthCredentials
   }
 
   public async getMemberFromCode(code: string): Promise<DiscordMember | null> {
+    if (!this.oauthCredentials) return null
+
     // get access token
     const formData = new URLSearchParams()
 
-    formData.append('client_id', this.id)
-    formData.append('client_secret', this.secret)
+    formData.append('client_id', this.oauthCredentials.id)
+    formData.append('client_secret', this.oauthCredentials.secret)
     formData.append('grant_type', 'authorization_code')
-    formData.append('redirect_uri', `${this.redirectUri}`)
+    formData.append('redirect_uri', `${this.oauthCredentials.redirectUri}`)
     formData.append('scope', 'identify')
     formData.append('code', code)
 

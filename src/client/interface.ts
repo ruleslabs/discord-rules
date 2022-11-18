@@ -2,7 +2,7 @@ import { UserDocument } from '@rulesorg/mongoose-rules'
 
 import { DiscordMember, RoleName } from '../types'
 
-export abstract class ClientInterface {
+export abstract class DiscordClientInterface {
 
   public abstract getMemberFromCode(code: string): Promise<DiscordMember | null>
 
