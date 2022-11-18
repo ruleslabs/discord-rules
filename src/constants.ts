@@ -1,6 +1,10 @@
 export const DISCORD_API_BASE_URL = 'https://discord.com/api/v10'
 export const DISCORD_GUILD_ID = '976525821391016096'
 
+export const ACHIEVEMENT_ROLES = {
+  'C-Halloween-Fullset': '1043186898815942656',
+}
+
 export const ROLES = {
   'Collectionneurs': '976542544680845312',
   'C-Winnterzuko': '976543376683970581',
@@ -36,4 +40,7 @@ export const ROLES = {
   'C-Vladimir-Cauchemar': '1037306153316651079',
   'C-Platine': '976602300971880479',
   'October-22-upgrade': '1031632810550775900',
+  ...ACHIEVEMENT_ROLES,
 }
+
+export const HALLOWEEN_ARTISTS_COUNT = 9

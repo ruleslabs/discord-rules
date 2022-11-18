@@ -1,4 +1,4 @@
-import { ROLES } from '@/constants'
+import { ROLES, ACHIEVEMENT_ROLES } from '@/constants'
 
 export interface DiscordMember {
   id: string
@@ -8,5 +8,6 @@ export interface DiscordMember {
 }
 
 export type RoleName = keyof typeof ROLES
+export type AchievementRoleName = keyof typeof ACHIEVEMENT_ROLES
 
 export type DiscordRoles = { [roleName: string]: number }
