@@ -8,7 +8,7 @@ import { DiscordMember, RoleName } from '@/types'
 export interface OauthCredentials {
   id: string
   secret: string
-  redirectUri: string
+  baseRedirectUri: string
 }
 
 export class DiscordClient implements DiscordClientInterface {
@@ -20,7 +20,7 @@ export class DiscordClient implements DiscordClientInterface {
     this.oauthCredentials = oauthCredentials
   }
 
-  public async getMemberFromCode(code: string): Promise<DiscordMember | null> {
+  public async getMemberFromCode(code: string, redirectPath: string): Promise<DiscordMember | null> {
     if (!this.oauthCredentials) return null
 
     // get access token
@@ -29,7 +29,7 @@ export class DiscordClient implements DiscordClientInterface {
     formData.append('client_id', this.oauthCredentials.id)
     formData.append('client_secret', this.oauthCredentials.secret)
     formData.append('grant_type', 'authorization_code')
-    formData.append('redirect_uri', `${this.oauthCredentials.redirectUri}`)
+    formData.append('redirect_uri', `${this.oauthCredentials.baseRedirectUri}${redirectPath}`)
     formData.append('scope', 'identify')
     formData.append('code', code)
 

@@ -4,7 +4,7 @@ import { DiscordMember, RoleName } from '../types'
 
 export abstract class DiscordClientInterface {
 
-  public abstract getMemberFromCode(code: string): Promise<DiscordMember | null>
+  public abstract getMemberFromCode(code: string, redirectPath: string): Promise<DiscordMember | null>
 
   public abstract getMemberById(memberId: string): Promise<DiscordMember | null>
 
