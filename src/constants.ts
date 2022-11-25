@@ -38,6 +38,7 @@ export const ROLES = {
   'C-Doums': '1030785225791385690',
   'C-Eden-Dillinger': '1037305879915143228',
   'C-Vladimir-Cauchemar': '1037306153316651079',
+  'C-Bigflo': '1045759505100701817',
   'C-Platine': '976602300971880479',
   'October-22-upgrade': '1031632810550775900',
   ...ACHIEVEMENT_ROLES,
