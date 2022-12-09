@@ -7,7 +7,12 @@ export interface DiscordMember {
   username: string
   discriminator: string
   avatar: string
+}
+
+export interface DiscordGuildMember {
+  avatar: string | null
   roles?: string[]
+  user: DiscordMember
 }
 
 export interface OauthCredentials {

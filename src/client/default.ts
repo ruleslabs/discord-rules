@@ -1,6 +1,13 @@
 import { DiscordClientInterface } from './interface'
 import { DISCORD_API_BASE_URL, DISCORD_GUILD_ID, ROLES } from '@/constants'
-import { DiscordMember, RoleName, DiscordRoles, OauthCredentials, RolesRefreshOptions } from '@/types'
+import {
+  DiscordMember,
+  DiscordGuildMember,
+  RoleName,
+  DiscordRoles,
+  OauthCredentials,
+  RolesRefreshOptions,
+} from '@/types'
 
 export class DiscordClient implements DiscordClientInterface {
   protected oauthCredentials?: OauthCredentials
@@ -72,7 +79,7 @@ export class DiscordClient implements DiscordClientInterface {
     roles: DiscordRoles,
     memberId?: string,
     options: RolesRefreshOptions = {}
-  ): Promise<DiscordMember | null> {
+  ): Promise<DiscordGuildMember | null> {
     if (!memberId) return null
 
     // getting currnet user roles
@@ -83,7 +90,7 @@ export class DiscordClient implements DiscordClientInterface {
         authorization: `Bot ${this.botToken}`,
       },
     })
-    const member = (await res.json() ?? null) as DiscordMember
+    const member = (await res.json() ?? null) as DiscordGuildMember
     if (!member?.roles) return null
 
     for (const roleName of (Object.keys(ROLES) as RoleName[])) {
