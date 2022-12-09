@@ -80,7 +80,7 @@ export class DiscordClient implements DiscordClientInterface {
       },
     })
     const member = (await res.json() ?? null) as DiscordMember
-    if (!member) return null
+    if (!member?.roles) return null
 
     for (const roleName of (Object.keys(ROLES) as RoleName[])) {
       let method: string | null = null

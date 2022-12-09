@@ -6,7 +6,8 @@ export interface DiscordMember {
   id: string
   username: string
   discriminator: string
-  roles: string[]
+  avatar: string
+  roles?: string[]
 }
 
 export interface OauthCredentials {
