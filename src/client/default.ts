@@ -68,8 +68,12 @@ export class DiscordClient implements DiscordClientInterface {
     return (await memberRes.json() ?? null) as DiscordMember
   }
 
-  public async refreshRolesForMemberById(roles: DiscordRoles, memberId?: string, options: RolesRefreshOptions = {}) {
-    if (!memberId) return
+  public async refreshRolesForMemberById(
+    roles: DiscordRoles,
+    memberId?: string,
+    options: RolesRefreshOptions = {}
+  ): Promise<DiscordMember | null> {
+    if (!memberId) return null
 
     // getting currnet user roles
     const res = await fetch(
@@ -106,6 +110,8 @@ export class DiscordClient implements DiscordClientInterface {
       // sleep if needed
       if (options.fetchDelay) await new Promise(resolve => setTimeout(resolve, options.fetchDelay))
     }
+
+    return member
   }
 
   public async grantRoleToMemberById(roleName: RoleName, memberId?: string) {
