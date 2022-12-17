@@ -2,11 +2,12 @@ export const DISCORD_API_BASE_URL = 'https://discord.com/api/v10'
 export const DISCORD_GUILD_ID = '976525821391016096'
 
 export const ACHIEVEMENT_ROLES = {
+  'C-Platine': '976602300971880479',
   'C-Halloween-Fullset': '1043186898815942656',
+  'Collectionneurs': '976542544680845312',
 }
 
-export const ROLES = {
-  'Collectionneurs': '976542544680845312',
+export const ARTISTS_ROLES = {
   'C-winnterzuko': '976543376683970581',
   'C-moji-x-sboy': '976598656071397466',
   'C-caballero': '976598789873881098',
@@ -39,9 +40,16 @@ export const ROLES = {
   'C-eden-dillinger': '1037305879915143228',
   'C-vladimir-cauchemar': '1037306153316651079',
   'C-bigflo': '1045759505100701817',
-  'C-Platine': '976602300971880479',
+}
+
+export const MISC_ROLES = {
   'October-22-upgrade': '1031632810550775900',
+}
+
+export const ROLES = {
   ...ACHIEVEMENT_ROLES,
+  ...ARTISTS_ROLES,
+  ...MISC_ROLES,
 }
 
 export const HALLOWEEN_ARTISTS_COUNT = 9
