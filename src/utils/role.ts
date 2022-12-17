@@ -1,7 +1,6 @@
 import { slugify } from '@rulesorg/sdk-core'
 
 import { ROLES, HALLOWEEN_ARTISTS_COUNT } from '@/constants'
-import { RoleName, AchievementRoleName } from '@/types'
 
 // regex
 export function parseCardSlug(slug: string) {
@@ -13,39 +12,29 @@ export function parseCardSlug(slug: string) {
   }
 }
 
-export function getRoleNamesFromCardSlug(slug: string): RoleName[] {
-  const rolesNames: RoleName[] = ['Collectionneurs']
-
-  const parsedSlug = parseCardSlug(slug)
-
-  if (parsedSlug.scarcity === 'platinium') rolesNames.push('C-Platine')
-
-  for (const roleName of (Object.keys(ROLES) as RoleName[])) {
-    if (slugify(roleName) === `c-${parsedSlug.artist}`) {
-      rolesNames.push(roleName)
-      break
-    }
-  }
-
-  return rolesNames
-}
-
-export function getAchievementRoleNamesFromCardSlugs(slugs: string[]): AchievementRoleName[] {
+export function getRoleNamesFromCardSlugs(slugs: string[]): string[] {
   const parsedSlugs = slugs.map((slug) => parseCardSlug(slug))
-  const rolesNames: AchievementRoleName[] = []
+  const rolesNames: { [roleName: string]: boolean } = {}
 
   // Halloween fullset
   const halloweenArtists: { [slug: string]: boolean } = {}
   let halloweenArtistsCount = 0
 
   for (const parsedSlug of parsedSlugs) {
+    // Halloween fullset
     if (parsedSlug.scarcity === 'halloween' && !halloweenArtists[parsedSlug.artist]) {
       halloweenArtists[parsedSlug.artist] = true
       ++halloweenArtistsCount
     }
+
+    // platinium club
+    if (parsedSlug.scarcity === 'platinium') rolesNames['C-Platine'] = true
+
+    // artists channels
+    rolesNames[`C-${parsedSlug.artist}`] = true
   }
 
-  if (HALLOWEEN_ARTISTS_COUNT === halloweenArtistsCount) rolesNames.push('C-Halloween-Fullset')
+  if (HALLOWEEN_ARTISTS_COUNT === halloweenArtistsCount) rolesNames['C-Halloween-Fullset'] = true
 
-  return rolesNames
+  return Object.keys(rolesNames)
 }

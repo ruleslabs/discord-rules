@@ -1,13 +1,6 @@
 import { DiscordClientInterface } from './interface'
 import { DISCORD_API_BASE_URL, DISCORD_GUILD_ID, ROLES } from '@/constants'
-import {
-  DiscordMember,
-  DiscordGuildMember,
-  RoleName,
-  DiscordRoles,
-  OauthCredentials,
-  RolesRefreshOptions,
-} from '@/types'
+import { DiscordMember, DiscordGuildMember, RoleName, OauthCredentials, RolesRefreshOptions } from '@/types'
 
 export class DiscordClient implements DiscordClientInterface {
   protected oauthCredentials?: OauthCredentials
@@ -76,7 +69,7 @@ export class DiscordClient implements DiscordClientInterface {
   }
 
   public async refreshRolesForMemberById(
-    roles: DiscordRoles,
+    roleNames: string[],
     memberId?: string,
     options: RolesRefreshOptions = {}
   ): Promise<DiscordGuildMember | null> {
@@ -93,15 +86,20 @@ export class DiscordClient implements DiscordClientInterface {
     const member = (await res.json() ?? null) as DiscordGuildMember
     if (!member?.roles) return null
 
+    const roleNamesTable = roleNames.reduce<{ [roleName: string]: boolean }>((acc, roleName) => {
+      acc[roleName] = true
+      return acc
+    }, {})
+
     for (const roleName of (Object.keys(ROLES) as RoleName[])) {
       let method: string | null = null
 
       if (member.roles.includes(ROLES[roleName])) {
         // need roles revokation
-        if ((roles[roleName] ?? 0) <= 0) method = 'DELETE'
+        if (!roleNamesTable[roleName]) method = 'DELETE'
       } else {
         // need roles grant
-        if ((roles[roleName] ?? 0) > 0) method = 'PUT'
+        if (roleNamesTable[roleName]) method = 'DELETE'
       }
 
       if (!method) continue
