@@ -16,6 +16,8 @@ export function getRoleNamesFromCardSlugs(slugs: string[]): string[] {
   const parsedSlugs = slugs.map((slug) => parseCardSlug(slug))
   const rolesNames: { [roleName: string]: boolean } = {}
 
+  if (slugs.length) rolesNames['Collectionneurs'] = true
+
   // Halloween fullset
   const halloweenArtists: { [slug: string]: boolean } = {}
   let halloweenArtistsCount = 0
