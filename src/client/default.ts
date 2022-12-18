@@ -99,7 +99,7 @@ export class DiscordClient implements DiscordClientInterface {
         if (!roleNamesTable[roleName]) method = 'DELETE'
       } else {
         // need roles grant
-        if (roleNamesTable[roleName]) method = 'DELETE'
+        if (roleNamesTable[roleName]) method = 'PUT'
       }
 
       if (!method) continue
