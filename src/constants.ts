@@ -40,6 +40,7 @@ export const ARTISTS_ROLES = {
   'C-eden-dillinger': '1037305879915143228',
   'C-vladimir-cauchemar': '1037306153316651079',
   'C-bigflo': '1045759505100701817',
+  'C-ysos': '1062828671389413477',
 }
 
 export const MISC_ROLES = {
