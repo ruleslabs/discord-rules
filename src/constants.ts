@@ -1,9 +1,14 @@
 export const DISCORD_API_BASE_URL = 'https://discord.com/api/v10'
 export const DISCORD_GUILD_ID = '976525821391016096'
 
+export const FULLSET_COMMON_ROLE_NAME = 'C-Fullset-Common'
+export const FULLSET_PLATINIUM_ROLE_NAME = 'C-Fullset-Platinium'
+export const FULLSET_HALLOWEEN_ROLE_NAME = 'C-Fullset-Halloween'
+
 export const ACHIEVEMENT_ROLES = {
-  'C-Platine': '976602300971880479',
-  'C-Halloween-Fullset': '1043186898815942656',
+  [FULLSET_COMMON_ROLE_NAME]: '1073706749854486608',
+  [FULLSET_PLATINIUM_ROLE_NAME]: '1073706957036335124',
+  [FULLSET_HALLOWEEN_ROLE_NAME]: '1043186898815942656',
   'Collectionneurs': '976542544680845312',
 }
 
@@ -54,3 +59,5 @@ export const ROLES = {
 }
 
 export const HALLOWEEN_ARTISTS_COUNT = 9
+export const COMMON_ARTISTS_COUNT = 31
+export const PLATINIUM_ARTISTS_COUNT = 31
