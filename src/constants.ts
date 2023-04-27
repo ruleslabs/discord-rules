@@ -60,4 +60,4 @@ export const ROLES = {
 
 export const HALLOWEEN_ARTISTS_COUNT = 9
 export const COMMON_ARTISTS_COUNT = 31
-export const PLATINIUM_ARTISTS_COUNT = 31
+export const PLATINIUM_ARTISTS_COUNT = 32
