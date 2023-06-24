@@ -1,6 +1,6 @@
 import { DiscordClientInterface } from './interface'
-import { DISCORD_API_BASE_URL, DISCORD_GUILD_ID, ROLES } from '@/constants'
-import { DiscordMember, DiscordGuildMember, RoleName, OauthCredentials, RolesRefreshOptions } from '@/types'
+import { DISCORD_API_BASE_URL, DISCORD_GUILD_ID, ROLES } from '../constants'
+import { DiscordMember, DiscordGuildMember, RoleName, OauthCredentials, RolesRefreshOptions } from '../types'
 
 export class DiscordClient implements DiscordClientInterface {
   protected oauthCredentials?: OauthCredentials
