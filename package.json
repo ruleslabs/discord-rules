@@ -3,7 +3,7 @@
   "version": "0.1.19",
   "description": "A set of functions to interact with Rules discord guild",
   "scripts": {
-    "build": "tsup && npm run build:esm && npm run build:dts",
+    "build": "tsup && yarn build:esm && yarn build:dts",
     "build:esm": "tsup --clean false --format esm --platform node",
     "build:dts": "tsup --clean false --dts-only",
     "prepublishOnly": "yarn build"
@@ -17,8 +17,8 @@
   "author": "Charles Lanier",
   "license": "MIT",
   "devDependencies": {
-    "tsup": "^7.0.0",
-    "typescript": "^4.6.3"
+    "tsup": "6.7.0",
+    "typescript": "^5.1.3"
   },
   "prettier": {
     "printWidth": 120,
