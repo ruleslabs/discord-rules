@@ -29,7 +29,5 @@
     "url": "https://github.com/ruleslabs/discord-rules/issues"
   },
   "homepage": "https://github.com/ruleslabs/discord-rules#readme",
-  "dependencies": {
-    "@rulesorg/sdk-core": "^0.9.5"
-  }
+  "dependencies": {}
 }

@@ -1,48 +1,54 @@
-import {
-  COMMON_ARTISTS_COUNT,
-  PLATINIUM_ARTISTS_COUNT,
-  HALLOWEEN_ARTISTS_COUNT,
-  FULLSET_COMMON_ROLE_NAME,
-  FULLSET_PLATINIUM_ROLE_NAME,
-  FULLSET_HALLOWEEN_ROLE_NAME,
-} from '@/constants'
-
 // regex
 export function parseCardSlug(slug: string) {
   const match = slug.match(/^(.+)-season-\d+-([a-z]+)-\d+$/)
 
   return {
-    artist: match?.[1] ?? '',
-    scarcity: match?.[2] ?? '',
+    artistSlug: match?.[1] ?? '',
+    scarcityName: match?.[2] ?? '',
   }
 }
 
-export function getRoleNamesFromCardSlugs(slugs: string[]): string[] {
-  const parsedSlugs = slugs.map((slug) => parseCardSlug(slug))
+export function parseCardModelSlug(slug: string) {
+  const match = slug.match(/^(.+)-season-\d+-([a-z]+)$/)
+
+  return {
+    artistSlug: match?.[1] ?? '',
+    scarcityName: match?.[2] ?? '',
+  }
+}
+
+export function getRoleNamesFromCardSlugs(cardsSlugs: string[], allCardModelsSlugs: string[]): string[] {
+  const parsedCardsSlugs = cardsSlugs.map((slug) => parseCardSlug(slug))
   const rolesNames: { [roleName: string]: boolean } = {}
 
-  if (slugs.length) rolesNames['Collectionneurs'] = true
+  if (cardsSlugs.length) rolesNames['Collectionneurs'] = true
+
+  // count max card models per scarcities
+  const cardModelsScarcitiesCounts = allCardModelsSlugs.reduce<Record<string, number>>((acc, slug) => {
+    const { scarcityName } = parseCardModelSlug(slug)
+
+    acc[scarcityName] ??= 0
+    ++acc[scarcityName]
+
+    return acc
+  }, {})
 
   // Fullsets
   const fullsets: { [scarcityName: string]: Set<string> } = {}
 
-  for (const parsedSlug of parsedSlugs) {
+  for (const { artistSlug, scarcityName } of parsedCardsSlugs) {
     // init fullset if needed and add artist
-    if (!fullsets[parsedSlug.scarcity]) fullsets[parsedSlug.scarcity] = new Set()
-    fullsets[parsedSlug.scarcity].add(parsedSlug.artist)
+    if (!fullsets[scarcityName]) fullsets[scarcityName] = new Set()
+    fullsets[scarcityName].add(artistSlug)
 
     // artists channels
-    rolesNames[`C-${parsedSlug.artist}`] = true
+    rolesNames[`C-${artistSlug}`] = true
   }
 
   // fullsets role mgmt
   for (const scarcityName of Object.keys(fullsets)) {
-    if (scarcityName === 'common' && fullsets[scarcityName].size === COMMON_ARTISTS_COUNT)
-      rolesNames[FULLSET_COMMON_ROLE_NAME] = true
-    else if (scarcityName === 'platinium' && fullsets[scarcityName].size === PLATINIUM_ARTISTS_COUNT)
-      rolesNames[FULLSET_PLATINIUM_ROLE_NAME] = true
-    else if (scarcityName === 'halloween' && fullsets[scarcityName].size === HALLOWEEN_ARTISTS_COUNT)
-      rolesNames[FULLSET_HALLOWEEN_ROLE_NAME] = true
+    if (fullsets[scarcityName].size >= cardModelsScarcitiesCounts[scarcityName])
+      rolesNames[`C-Fullset-${scarcityName}`] = true
   }
 
   return Object.keys(rolesNames)
