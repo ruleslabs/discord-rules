@@ -1,7 +1,7 @@
 export const DISCORD_API_BASE_URL = 'https://discord.com/api/v10'
 export const DISCORD_GUILD_ID = '976525821391016096'
 
-const COLLECTOR_ROLE_NAME = 'Collectionneur'
+export const COLLECTOR_ROLE_NAME = 'Collectionneur'
 
 export const ACHIEVEMENT_ROLES = {
   'C-Fullset-common': '1073706749854486608',
