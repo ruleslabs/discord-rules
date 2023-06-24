@@ -1,6 +1,6 @@
 {
   "name": "@rulesorg/discord-rules",
-  "version": "0.1.19",
+  "version": "0.1.20",
   "description": "A set of functions to interact with Rules discord guild",
   "scripts": {
     "build": "tsup && yarn build:esm && yarn build:dts",
