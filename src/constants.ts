@@ -31,6 +31,8 @@ export const ARTISTS_ROLES = {
   'C-wallace-cleaver': '976599613794574336',
   'C-winnterzuko': '976599613794574336',
   'C-youv-dee': '976599613794574336',
+
+  'C-jwles': '1122152386912329778',
 }
 
 export const ROLES = {
