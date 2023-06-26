@@ -1,3 +1,5 @@
+import { COLLECTOR_ROLE_NAME } from '../constants'
+
 // regex
 export function parseCardSlug(slug: string) {
   const match = slug.match(/^(.+)-season-\d+-([a-z]+)-\d+$/)
@@ -21,7 +23,7 @@ export function getRoleNamesFromCardSlugs(cardsSlugs: string[], allCardModelsSlu
   const parsedCardsSlugs = cardsSlugs.map((slug) => parseCardSlug(slug))
   const rolesNames: { [roleName: string]: boolean } = {}
 
-  if (cardsSlugs.length) rolesNames['Collectionneurs'] = true
+  if (cardsSlugs.length) rolesNames[COLLECTOR_ROLE_NAME] = true
 
   // count max card models per scarcities
   const cardModelsScarcitiesCounts = allCardModelsSlugs.reduce<Record<string, number>>((acc, slug) => {
