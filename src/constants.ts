@@ -32,7 +32,7 @@ export const ARTISTS_ROLES = {
   'C-winnterzuko': '1122573505507119154',
   'C-youv-dee': '1122573546388992120',
 
-  'C-jwles': '1122152386912329778',
+  'C-rad-cartier': '1126773642588598373',
 }
 
 export const ROLES = {
