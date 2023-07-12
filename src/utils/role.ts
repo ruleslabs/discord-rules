@@ -27,18 +27,23 @@ export function getRoleNamesFromCardSlugs(cardsSlugs: string[], allCardModelsSlu
 
   if (cardsSlugs.length) rolesNames[COLLECTOR_ROLE_NAME] = true
 
-  // count max card models per scarcities and current season
-  const cardModelsScarcitiesCounts: Record<string, number> = {}
-  let currentSeason = 0
+  // count current season
+  const currentSeason = allCardModelsSlugs.reduce<number>(
+    (acc, slug) => Math.max(acc, parseCardModelSlug(slug).season),
+    0
+  )
 
-  for (const slug of allCardModelsSlugs) {
+  // count max card models per scarcities for current season
+  const cardModelsCurrentSeasonScarcitiesCounts = allCardModelsSlugs.reduce<Record<string, number>>((acc, slug) => {
     const { scarcityName, season } = parseCardModelSlug(slug)
 
-    cardModelsScarcitiesCounts[scarcityName] ??= 0
-    ++cardModelsScarcitiesCounts[scarcityName]
+    if (season !== currentSeason) return acc
 
-    currentSeason = Math.max(currentSeason, season)
-  }
+    acc[scarcityName] ??= 0
+    ++acc[scarcityName]
+
+    return acc
+  }, {})
 
   // Fullsets
   const fullsets: { [scarcityName: string]: Set<string> } = {}
@@ -58,7 +63,7 @@ export function getRoleNamesFromCardSlugs(cardsSlugs: string[], allCardModelsSlu
 
   // fullsets role mgmt
   for (const scarcityName of Object.keys(fullsets)) {
-    if (fullsets[scarcityName].size >= cardModelsScarcitiesCounts[scarcityName]) {
+    if (fullsets[scarcityName].size >= cardModelsCurrentSeasonScarcitiesCounts[scarcityName]) {
       rolesNames[`C-Fullset-${scarcityName}`] = true
     }
   }
