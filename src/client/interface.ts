@@ -10,5 +10,7 @@ export abstract class DiscordClientInterface {
 
   public abstract grantRoleToMemberById(roleName: RoleName, memberId?: string): void
 
+  public abstract grantRawRoleToMemberById(roleId: string, memberId?: string): void
+
   public abstract revokeRoleForMemberById(roleName: RoleName, memberId?: string): void
 }

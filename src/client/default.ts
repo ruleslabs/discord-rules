@@ -120,10 +120,14 @@ export class DiscordClient implements DiscordClientInterface {
   }
 
   public async grantRoleToMemberById(roleName: RoleName, memberId?: string) {
+    await this.grantRawRoleToMemberById(ROLES[roleName], memberId)
+  }
+
+  public async grantRawRoleToMemberById(roleId: string, memberId?: string) {
     if (!memberId) return
 
     await fetch(
-      `${DISCORD_API_BASE_URL}/guilds/${DISCORD_GUILD_ID}/members/${memberId}/roles/${ROLES[roleName]}`, {
+      `${DISCORD_API_BASE_URL}/guilds/${DISCORD_GUILD_ID}/members/${memberId}/roles/${roleId}`, {
       method: 'PUT',
       headers: {
         authorization: `Bot ${this.botToken}`,
